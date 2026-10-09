@@ -7,7 +7,7 @@ set -ex
 script_path="$(dirname "$(realpath "${BASH_SOURCE[0]:-$0}")")"
 cd "$script_path"
 
-source .env
+source ./.env
 
 chmod +x ./sync_dotenvs.sh
 sudo -u "#$HOST_NONROOT_UID" bash ./sync_dotenvs.sh

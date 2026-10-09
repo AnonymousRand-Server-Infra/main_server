@@ -17,6 +17,8 @@ and, to docker compose: you really are a cool concept, but sincerely, from the d
 
 - make sure docker is installed and enabled as a systemd service.
 - write a `.env` file at every place that has a `.env.example` that is correct for your setup, and make sure all the "SYNC" comments in every file in the project are checked.
+- add in all gitignored secrets like anubis private keys (just look around in `.env.example`s for them).
+- `chmod` to make sure all scripts (at least the deployment ones called by e.g. systemd) have executable bit set.
 - make sure bind mounts have the right perms on the host for the containers to access them.
 - for ssl web services, you may need to tweak the nginx config to accept http first, then run certbot on the host (i do not have a dockerized certbot since it's probably complicated and might have chicken-and-egg issues with nginx) to general ssl certs.
 - run `deploy.sh` in the appropriate project directory to start or restart the containers. the `deploy.sh`s found in some subproject should allow you to deploy or restart that subproject independently. in production, you probably want to use a systemd service to run these scripts (at least the main server one; trying to make the others independent systemd services might be tricky).

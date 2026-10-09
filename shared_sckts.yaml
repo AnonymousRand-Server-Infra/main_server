@@ -1,0 +1,29 @@
+services:
+  shared_sckts_user:
+    container_name: shared_sckts_user
+    profiles:
+      - do_not_start
+    volumes:
+      - type: volume
+        source: shared_sckts
+        target: /run/sockets/
+    # IMPORTANT: this container MUST be called before any root services (e.g. nginx) start,
+    # in order to make sure that the socket volume is created with non-root privileges so
+    # the other non-root containers can access it!
+    pre_start:
+      - image: alpine:latest
+        user: "0:0"
+        command:
+          - /usr/bin/env
+          - sh
+          - -c
+          - |
+            # make sure non-root containers can access these
+            chown ${DOCKER_NONROOT_USER:?} /run/sockets/
+            # need executable bit for nginx group to traverse into here!!
+            # but don't recurse since nginx group needs all perms for the sockets themselves
+            chmod 710 /run/sockets/
+
+volumes:
+  shared_sckts:
+    name: "shared_sckts"

@@ -1,15 +1,15 @@
 [submodule "proxy/nginx"]
 	path = proxy/nginx
-	url = git@github.com:Anonymousrand-Server-Infra/nginx_config.git
+	url = git@github.com:AnonymousRand-Server-Infra/nginx_config.git
 [submodule "proxy/anubis"]
 	path = proxy/anubis
-	url = git@github.com:Anonymousrand-Server-Infra/anubis_base_config.git
+	url = git@github.com:AnonymousRand-Server-Infra/anubis_config.git
 [submodule "proxy/iocaine"]
 	path = proxy/iocaine
-	url = git@github.com:Anonymousrand-Server-Infra/iocaine_config.git
+	url = git@github.com:AnonymousRand-Server-Infra/iocaine_config.git
 [submodule "services/personal_website"]
 	path = services/personal_website
 	url = git@github.com:AnonymousRand/personal_website.git
 [submodule "services/mail_server"]
 	path = services/mail_server
-	url = git@github.com:Anonymousrand-Server-Infra/mail_server.git
+	url = git@github.com:AnonymousRand-Server-Infra/mail_server.git

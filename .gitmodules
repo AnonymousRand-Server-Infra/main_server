@@ -3,7 +3,7 @@
 	url = git@github.com:AnonymousRand-Server-Infra/nginx_config.git
 [submodule "proxy/anubis"]
 	path = proxy/anubis
-	url = git@github.com:AnonymousRand-Server-Infra/anubis_config.git
+	url = git@github.com:AnonymousRand-Server-Infra/anubis_base_config.git
 [submodule "proxy/iocaine"]
 	path = proxy/iocaine
 	url = git@github.com:AnonymousRand-Server-Infra/iocaine_config.git

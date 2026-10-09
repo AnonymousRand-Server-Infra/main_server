@@ -1,0 +1,10 @@
+[Unit]
+Description=deploy server
+After=network.target
+
+[Service]
+WorkingDirectory=<REPLACE: absolute path to server base directory>
+ExecStart=/usr/bin/env bash deploy.sh
+
+[Install]
+WantedBy=multi-user.target

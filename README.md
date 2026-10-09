@@ -9,7 +9,7 @@ and, to docker compose: you really are a cool concept, but sincerely, from the d
 ## infra overview
 - traffic for a service usually takes the following path, with nginx being a reverse proxy:
 
-    ![traffic_diagram.png](./.git_assets/traffic_diagram.png)
+    <img src="./.git_assets/traffic_diagram.png" width="476px">
 
 - anubis should have one separate instance per service in order to write service-specific filtering rules, whereas iocaine is a single server-wide instance for simplicity. the `./proxy/anubis/` subproject is the BASE anubis setup that each service's anubis instance should build off of.
 

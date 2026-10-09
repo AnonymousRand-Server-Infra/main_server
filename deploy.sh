@@ -27,8 +27,4 @@ docker stop mail_server_tachyon && docker rm -v mail_server_tachyon
 docker stop mail_server_anubis && docker rm -v mail_server_anubis
 
 docker system prune --force
-## for some reason only running the `docker compose build` part of these scripts
-## fails to see changes
-#./proxy/nginx/deploy.sh --no-stop
-#./services/personal_website/deploy.sh --no-stop
 docker compose --profile "$DOCKER_DEFAULT_PROFILE" up --build

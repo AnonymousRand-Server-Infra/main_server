@@ -17,6 +17,7 @@ sudo -u "#$HOST_NONROOT_UID" bash ./sync_dotenvs.sh
 docker compose --profile "$DOCKER_DEFAULT_PROFILE" down
 
 # otherwise (e.g. if they were started by a nested docker project), we do a project-agnostic restart
+# SYNC: containers!
 docker stop nginx && docker rm -v nginx
 docker stop iocaine && docker rm -v iocaine
 docker stop personal_website && docker rm -v personal_website

@@ -46,7 +46,8 @@ for file in **/.env; do
     # check in case of empty glob
     if [[ -f "$file" ]]; then
         upsertLine "$file" \
-            "DOCKER_DEFAULT_PROFILE" "DOCKER_DEFAULT_PROFILE=$DOCKER_DEFAULT_PROFILE" "true" \
+            "DOCKER_DEFAULT_PROFILE" "DOCKER_DEFAULT_PROFILE=$DOCKER_DEFAULT_PROFILE" "true"
+        upsertLine "$file" \
             "DOCKER_ROOT_USER" "DOCKER_ROOT_USER=$DOCKER_ROOT_USER" "false"
         upsertLine "$file" \
             "DOCKER_NONROOT_USER" "DOCKER_NONROOT_USER=$DOCKER_NONROOT_USER" "false"

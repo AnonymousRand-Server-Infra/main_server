@@ -11,9 +11,14 @@
 
 set -e
 
-source .env
-
 shopt -s globstar
+
+# this makes sure that this script always runs in its own directory so that it pulls
+# the right `.env`, for instance (this should also be an absolute path)
+script_path="$(dirname "$(realpath "${BASH_SOURCE[0]:-$0}")")"
+cd "$script_path"
+
+source ./.env
 
 function upsertLine {
     file="$1"
@@ -51,5 +56,7 @@ for file in **/.env; do
             "DOCKER_ROOT_USER" "DOCKER_ROOT_USER=$DOCKER_ROOT_USER" "false"
         upsertLine "$file" \
             "DOCKER_NONROOT_USER" "DOCKER_NONROOT_USER=$DOCKER_NONROOT_USER" "false"
+        upsertLine "$file" \
+            "HOST_NONROOT_UID" "HOST_NONROOT_UID=$HOST_NONROOT_UID" "false"
     fi
 done

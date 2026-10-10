@@ -28,4 +28,8 @@ docker stop mail_server_tachyon && docker rm -v mail_server_tachyon
 docker stop mail_server_anubis && docker rm -v mail_server_anubis
 
 docker system prune --force
-docker compose --profile "$DOCKER_DEFAULT_PROFILE" up --build
+if [[ "$1" == "-d" ]]; then
+    docker compose --profile "$DOCKER_DEFAULT_PROFILE" up --build -d
+else
+    docker compose --profile "$DOCKER_DEFAULT_PROFILE" up --build
+fi

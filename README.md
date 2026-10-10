@@ -41,3 +41,5 @@ and, to docker compose: you really are a cool concept, but sincerely, from the d
 ---
 
 i think if docker and nix had a baby then i would be very happy.
+
+or, if you could just pass *a fucking list* to yaml interpolation.

@@ -3,7 +3,7 @@ Description=deploy server
 After=network.target
 
 [Service]
-WorkingDirectory=<REPLACE: absolute path to server base directory>
+WorkingDirectory=<REPLACE: absolute path to server's base directory>
 ExecStart=/usr/bin/env bash deploy.sh
 
 [Install]

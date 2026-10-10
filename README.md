@@ -27,6 +27,8 @@ and, to docker compose: you really are a cool concept, but sincerely, from the d
 
 - if something isn't working, common places to check are:
     - perms perms perms (e.g. for unix sockets or bind mounts). it's always perms.
+        - unix sockets are created by the listener, but the producer (speaker?) needs both read and write perms, as well as executable bits set on all earlier directories of the socket file in order to traverse them. reference the diagram above to know who is the listener and producer of each socket.
+        - currently, my strategy is to always assign the group of a unix socket to be nginx's group in its docker image (currently gid `101`), and make sure the perms above are granted to the group. this allows the user to have freedom between root or non-root while making sure nginx can always access the sockets since it wires everything together.
     - `.env`s especially the relative paths
     - the "SYNC" comments
     - perms

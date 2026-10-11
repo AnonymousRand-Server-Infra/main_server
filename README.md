@@ -18,7 +18,6 @@ and, to docker compose: you really are a cool concept, but sincerely, from the d
 - make sure docker is installed and enabled as a systemd service.
 - write all the files that have a `.example` such that it is correct for your setup (e.g. write an `.env` file for every `.env.example` and a `Dockerfile.dockerignore` for every `Dockerfile.dockerignore.example`), and make sure all the "SYNC" comments in every file in the project are checked.
 - add in all gitignored secrets like anubis private keys (just look around in `.env.example`s or `.gitignore`s for them ig).
-- `chmod` to make sure all scripts (at least the deployment ones called by e.g. systemd) have executable bit set.
 - make sure bind mounts have the right perms on the host for the containers to access them!
 - certbot instructions (currently i do not have a dockerized certbot since it's probably kinda complicated and i need to do actual Important Things, so these instructions will be for running certbot on the host):
     1. first tweak the nginx config for the service you want to certbot to accept http on port 80, and include the [./proxy/nginx/data/templates/snippets/acme_challs.func](./proxy/nginx/data/templates/snippets/acme_challs.func) snippet inside the `server` block. this ensures that acme challenge paths are immediately served by nginx (which also gives us the bonus of not having to worry about anubis etc. filtering it out).

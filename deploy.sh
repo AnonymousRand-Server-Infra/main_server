@@ -32,7 +32,7 @@ docker stop mail_server_anubis && docker rm -v mail_server_anubis
 
 docker system prune --force
 if [[ "$1" == "-d" ]]; then
-    docker compose --profile "$DOCKER_DEFAULT_PROFILE" up --build -d
+    docker compose --profile "$DOCKER_DEFAULT_PROFILE" up --build --force-recreate -d
 else
-    docker compose --profile "$DOCKER_DEFAULT_PROFILE" up --build
+    docker compose --profile "$DOCKER_DEFAULT_PROFILE" up --build --force-recreate
 fi

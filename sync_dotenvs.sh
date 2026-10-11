@@ -51,7 +51,15 @@ for file in **/.env; do
     # check in case of empty glob
     if [[ -f "$file" ]]; then
         upsertLine "$file" \
-            "DOCKER_DEFAULT_PROFILE" "DOCKER_DEFAULT_PROFILE=$DOCKER_DEFAULT_PROFILE" "true"
+            "CPU_ARCH" "CPU_ARCH=$CPU_ARCH" "true"
+        upsertLine "$file" \
+            "DOCKER_DEFAULT_PROFILE" "DOCKER_DEFAULT_PROFILE=$DOCKER_DEFAULT_PROFILE" "false"
+        upsertLine "$file" \
+            "DOCKER_ROOT_UID" "DOCKER_ROOT_UID=$DOCKER_ROOT_UID" "false"
+        upsertLine "$file" \
+            "DOCKER_NONROOT_UID" "DOCKER_NONROOT_UID=$DOCKER_NONROOT_UID" "false"
+        upsertLine "$file" \
+            "DOCKER_NGINX_GID" "DOCKER_NGINX_GID=$DOCKER_NGINX_GID" "false"
         upsertLine "$file" \
             "DOCKER_ROOT_USER" "DOCKER_ROOT_USER=$DOCKER_ROOT_USER" "false"
         upsertLine "$file" \

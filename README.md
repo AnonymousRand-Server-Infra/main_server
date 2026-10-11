@@ -31,11 +31,21 @@ and, to docker compose: you really are a cool concept, but sincerely, from the d
         - currently, my strategy is to always assign the group of a unix socket to be nginx's group in its docker image (currently gid `101`), and make sure the perms above are granted to the group. this allows the user to have freedom between root or non-root while making sure nginx can always access the sockets since it wires everything together.
     - `.env`s especially the relative paths
     - the "SYNC" comments
+    - docker compose `pre_start` images may need `docker pull`ing
     - perms
 - avoid these since they will probably break, both the project and your heart:
     - attemping to use a non-default or more than one `.env` file in a subproject for compose.yaml interpolation: recursive includes of these files will often break the relative paths to these `.env` files in ways that i do not comprehend, not to mention that you will also have to keep track of which `.env` files to use in deploy scripts/when running manual docker commands. this is why i have a script that manually copies values between `.env` files that are run by the relevant deploy scripts, and also why docker compose turned my hair gray.
 - general docker stuffs:
     - use named volumes for container-generated data that needs to be persisted across service restarts, and use bind mounts for either host-provided data or container-provided data that the host also needs to control/know the path to.
+    - it seems that if doing something like
+
+        ```yaml
+        command: >
+          sh -c '...'
+        ```
+
+        you CANNOT use `>-` instead of `>`.
+
 - currently, only `deploy.sh` for items that need to be frequently restarted by themselves are provided.
 
 ---

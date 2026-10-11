@@ -23,6 +23,9 @@ docker stop iocaine && docker rm -v iocaine
 docker stop personal_website && docker rm -v personal_website
 docker stop personal_website_mysql && docker rm -v personal_website_mysql
 docker stop personal_website_anubis && docker rm -v personal_website_anubis
+docker stop git_server && docker rm -v git_server
+docker stop git_server_mysql && docker rm -v git_server_mysql
+docker stop git_server_anubis && docker rm -v git_server_anubis
 docker stop mail_server && docker rm -v mail_server
 docker stop mail_server_tachyon && docker rm -v mail_server_tachyon
 docker stop mail_server_anubis && docker rm -v mail_server_anubis

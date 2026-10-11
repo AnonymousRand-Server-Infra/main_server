@@ -4,4 +4,5 @@ include:
   - ./proxy/nginx/compose.yaml
   - ./proxy/iocaine/compose.yaml
   - ./services/personal_website/compose.yaml
+  - ./services/git_server/compose.yaml
   - ./services/mail_server/compose.yaml

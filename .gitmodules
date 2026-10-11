@@ -13,3 +13,6 @@
 [submodule "services/mail_server"]
 	path = services/mail_server
 	url = git@github.com:AnonymousRand-Server-Infra/mail_server.git
+[submodule "services/git_server"]
+	path = services/git_server
+	url = git@github.com:AnonymousRand-Server-Infra/git_server.git

@@ -16,7 +16,7 @@ and, to docker compose: you really are a cool concept, but sincerely, from the d
 ## first time setup guide
 
 - make sure docker is installed and enabled as a systemd service.
-- write all the files that have a `.example` (e.g. write an `.env` file for every `.env.example` and a `Dockerfile.dockerignore` for every `Dockerfile.dockerignore.example`) such that it is correct for your setup, and make sure all the "SYNC" comments in every file in the project are checked.
+- write all the files that have a `.example` such that it is correct for your setup (e.g. write an `.env` file for every `.env.example` and a `Dockerfile.dockerignore` for every `Dockerfile.dockerignore.example`), and make sure all the "SYNC" comments in every file in the project are checked.
 - add in all gitignored secrets like anubis private keys (just look around in `.env.example`s or `.gitignore`s for them ig).
 - `chmod` to make sure all scripts (at least the deployment ones called by e.g. systemd) have executable bit set.
 - make sure bind mounts have the right perms on the host for the containers to access them!

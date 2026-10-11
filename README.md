@@ -11,7 +11,7 @@ and, to docker compose: you really are a cool concept, but sincerely, from the d
 
     <img src="./.git_assets/traffic_diagram.png" width="476px">
 
-- anubis should have one separate instance per service in order to write service-specific filtering rules, whereas iocaine is a single server-wide instance for simplicity. the `./proxy/anubis/` subproject is the BASE anubis setup that each service's anubis instance should build off of.
+- anubis should have one separate instance per service in order to write service-specific filtering rules, whereas iocaine is a single server-wide instance for simplicity. the [./proxy/anubis/](./proxy/anubis) subproject is the BASE anubis setup that each service's anubis instance should build off of.
 
 ## first time setup guide
 

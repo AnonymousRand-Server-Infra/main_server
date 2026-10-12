@@ -10,11 +10,8 @@ cd "$script_path"
 source ./.env
 path_to_utils="$PATH_FROM_ROOT_TO_UTILS"
 
-chmod +x "$path_to_utils/sync_dotenvs.sh"
-"$path_to_utils/sync_dotenvs.sh"
-
-chmod +x ./stop.sh
-./stop.sh
+chmod +x "$path_to_utils/sync_dotenvs.sh" && "$path_to_utils/sync_dotenvs.sh"
+chmod +x ./stop.sh && ./stop.sh
 
 docker system prune --force
 if [[ "$1" == "-d" ]]; then

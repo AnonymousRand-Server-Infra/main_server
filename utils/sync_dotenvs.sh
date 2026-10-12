@@ -32,6 +32,10 @@ function upsertEnvVar {
     replacement_line="$env_var=${!env_var}"
     is_found='false'
 
+    tmp_file="$file.tmp"
+    touch "$tmp_file"
+    # make sure e.g. `.env` file perms are preserved
+    chmod --reference="$file" "$tmp_file"
     while IFS= read -r line; do
         if [[ "$line" == *"$replace_pattern"* ]]; then
             echo "$replacement_line"
@@ -39,7 +43,7 @@ function upsertEnvVar {
         else
             echo "$line"
         fi
-    done < "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+    done < "$file" > "$tmp_file" && mv -f "$tmp_file" "$file"
 
     if [[ "$is_found" == "false" ]]; then
         (

@@ -10,7 +10,7 @@ cd "$script_path"
 source ./.env
 
 chmod +x ./sync_dotenvs.sh
-sudo -u "#$HOST_NONROOT_UID" bash ./sync_dotenvs.sh
+./sync_dotenvs.sh
 
 chmod +x ./stop.sh
 ./stop.sh

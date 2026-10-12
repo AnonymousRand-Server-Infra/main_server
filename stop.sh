@@ -11,7 +11,7 @@ source ./.env
 
 # still need this for `docker compose down` to succeed
 chmod +x ./sync_dotenvs.sh
-sudo -u "#$HOST_NONROOT_UID" bash ./sync_dotenvs.sh
+./sync_dotenvs.sh
 
 # try this in our current directory first in case the services to stop were started by
 # this project originally

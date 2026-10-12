@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # yes, i know the `env_file` key under `include` exists for docker compose to pass multiple
 # `.env` files to a compose.yaml, but the relative paths appear to catastrophically fuck up
 # whenever there are recursive includes, and i also have to manually keep track of them
@@ -7,8 +9,6 @@
 # YOU FUCKING GREASY PIECE OF SHIT
 # FUCK YOU
 
-#!/usr/bin/env bash
-
 set -e
 
 shopt -s globstar
@@ -17,16 +17,21 @@ shopt -s globstar
 # the right `.env`, for instance (this should also be an absolute path)
 script_path="$(dirname "$(realpath "${BASH_SOURCE[0]:-$0}")")"
 cd "$script_path"
+# we need to be in the parent directory to use globstar effectively
+# SYNC: path to server's base directory's `.env`
+cd ../
 
 source ./.env
 
-function upsertLine {
+function upsertEnvVar {
     file="$1"
-    replace_pattern="$2"
-    replacement_line="$3"
-    is_first_appended_line="$4"
+    env_var="$2"
+    is_first_appended_line="${3:-false}"
 
+    replace_pattern="$env_var"
+    replacement_line="$env_var=${!env_var}"
     is_found='false'
+
     while IFS= read -r line; do
         if [[ "$line" == *"$replace_pattern"* ]]; then
             echo "$replacement_line"
@@ -50,21 +55,17 @@ function upsertLine {
 for file in **/.env; do
     # check in case of empty glob
     if [[ -f "$file" ]]; then
-        upsertLine "$file" \
-            "CPU_ARCH" "CPU_ARCH=$CPU_ARCH" "true"
-        upsertLine "$file" \
-            "DOCKER_DEFAULT_PROFILE" "DOCKER_DEFAULT_PROFILE=$DOCKER_DEFAULT_PROFILE" "false"
-        upsertLine "$file" \
-            "DOCKER_ROOT_UID" "DOCKER_ROOT_UID=$DOCKER_ROOT_UID" "false"
-        upsertLine "$file" \
-            "DOCKER_NONROOT_UID" "DOCKER_NONROOT_UID=$DOCKER_NONROOT_UID" "false"
-        upsertLine "$file" \
-            "DOCKER_NGINX_GID" "DOCKER_NGINX_GID=$DOCKER_NGINX_GID" "false"
-        upsertLine "$file" \
-            "DOCKER_ROOT_USER" "DOCKER_ROOT_USER=$DOCKER_ROOT_USER" "false"
-        upsertLine "$file" \
-            "DOCKER_NONROOT_USER" "DOCKER_NONROOT_USER=$DOCKER_NONROOT_USER" "false"
-        upsertLine "$file" \
-            "HOST_NONROOT_UID" "HOST_NONROOT_UID=$HOST_NONROOT_UID" "false"
+        upsertEnvVar "$file" "CPU_ARCH" "true"
+        upsertEnvVar "$file" "DOCKER_DEFAULT_PROFILE"
+        upsertEnvVar "$file" "DOCKER_ROOT_UID"
+        upsertEnvVar "$file" "DOCKER_NONROOT_UID"
+        upsertEnvVar "$file" "DOCKER_NGINX_GID"
+        upsertEnvVar "$file" "DOCKER_ROOT_USER"
+        upsertEnvVar "$file" "DOCKER_NONROOT_USER"
+        upsertEnvVar "$file" "HOST_NONROOT_UID"
+        upsertEnvVar "$file" "PATH_FROM_ROOT_TO_UTILS"
+        upsertEnvVar "$file" "PATH_FROM_ROOT_TO_NGINX"
+        upsertEnvVar "$file" "PATH_FROM_ROOT_TO_ANUBIS"
+        upsertEnvVar "$file" "PATH_FROM_ROOT_TO_IOCAINE"
     fi
 done

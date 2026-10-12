@@ -8,9 +8,10 @@ script_path="$(dirname "$(realpath "${BASH_SOURCE[0]:-$0}")")"
 cd "$script_path"
 
 source ./.env
+path_to_utils="$PATH_FROM_ROOT_TO_UTILS"
 
-chmod +x ./sync_dotenvs.sh
-./sync_dotenvs.sh
+chmod +x "$path_to_utils/sync_dotenvs.sh"
+"$path_to_utils/sync_dotenvs.sh"
 
 chmod +x ./stop.sh
 ./stop.sh

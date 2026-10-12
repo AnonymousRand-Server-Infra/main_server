@@ -3,6 +3,8 @@ Description=deploy server
 After=network.target
 
 [Service]
+# this user needs to be able to deploy docker
+User=root
 WorkingDirectory=<REPLACE: absolute path to server's base directory>
 ExecStart=/usr/bin/env bash deploy.sh
 

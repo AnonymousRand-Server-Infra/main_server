@@ -7,6 +7,7 @@ After=network.target
 User=root
 WorkingDirectory=<REPLACE: absolute path to server's base directory>
 ExecStart=/usr/bin/env bash deploy.sh
+ExecStop=/usr/bin/env bash stop.sh
 
 [Install]
 WantedBy=multi-user.target

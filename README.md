@@ -39,11 +39,12 @@ and, to docker compose: you really are a cool concept, but sincerely, from the d
         - mysql data directories (i.e. those bound to `/var/lib/mysql` in the container) should have `700` perms.
         - letsencrypt certs need to be readable by nginx's worker process group (`nginx`).
         - be mindful of owner and perms of config files and `envsubst`ed config files, especially if using a dockerfile.
-    - `.env`s especially the relative paths
-    - the "SYNC" comments
-    - docker compose `pre_start` images may need `docker pull`ing
-    - make sure entrypoints etc. are not accidentally dockerignored
+    - `.env`s especially the relative paths.
+    - the "SYNC" comments.
+    - docker compose `pre_start` images may need `docker pull`ing.
+    - make sure entrypoints etc. are not accidentally dockerignored.
     - check firewalls for the server's vps/cloud service if applicable.
+    - make sure you set all required env vars (e.g. `envsubst` does not fail on missing env vars).
     - perms
 - avoid these since they will probably break, both the project and your heart:
     - attemping to use a non-default or more than one `.env` file in a subproject for compose.yaml interpolation: recursive includes of these files will often break the relative paths to these `.env` files in ways that i do not comprehend, not to mention that you will also have to keep track of which `.env` files to use in deploy scripts/when running manual docker commands. this is why i have a script that manually copies values between `.env` files that are run by the relevant deploy scripts, and also why docker compose turned my hair gray.

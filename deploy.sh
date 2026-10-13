@@ -14,8 +14,22 @@ chmod +x "$path_to_utils/sync_dotenvs.sh" && "$path_to_utils/sync_dotenvs.sh"
 chmod +x ./stop.sh && ./stop.sh
 
 docker system prune --force
+
+# manually build all dockerfiles with `--no-cache` to see all possible changes
+# SYNC: directories which have dockerfiles!
+docker compose --profile "$DOCKER_DEFAULT_PROFILE" \
+    --project-directory ./proxy/nginx/ build --no-cache
+docker compose --profile "$DOCKER_DEFAULT_PROFILE" \
+    --project-directory ./proxy/anubis/ build --no-cache
+docker compose --profile "$DOCKER_DEFAULT_PROFILE" \
+    --project-directory ./proxy/iocaine/ build --no-cache
+docker compose --profile "$DOCKER_DEFAULT_PROFILE" \
+    --project-directory ./services/personal_website/ build --no-cache
+docker compose --profile "$DOCKER_DEFAULT_PROFILE" \
+    --project-directory ./services/mail_server/ build --no-cache
+
 if [[ "$1" == "-d" ]]; then
-    docker compose --profile "$DOCKER_DEFAULT_PROFILE" up --build --force-recreate -d
+    docker compose --profile "$DOCKER_DEFAULT_PROFILE" up --force-recreate -d
 else
-    docker compose --profile "$DOCKER_DEFAULT_PROFILE" up --build --force-recreate
+    docker compose --profile "$DOCKER_DEFAULT_PROFILE" up --force-recreate
 fi

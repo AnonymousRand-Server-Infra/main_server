@@ -9,7 +9,7 @@
 # YOU FUCKING GREASY PIECE OF SHIT
 # FUCK YOU
 
-set -e
+set -euo pipefail
 
 shopt -s globstar
 

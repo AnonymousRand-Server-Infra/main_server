@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-set -ex
+set -euo pipefail
+set -x
 
 # IMPORTANT: since this script is sourced, do NOT change the working directory in here!
 

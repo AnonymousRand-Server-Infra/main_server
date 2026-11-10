@@ -24,7 +24,7 @@ and, to docker compose: you really are a cool concept, but sincerely, from the d
     2. start the nginx container.
     3. on the host, run `certbot certonly --webroot -w <acme challs directory> -d <site domain>`; `<acme challs directory>` must be the same path (like `/var/www/certbot/`) specified in [./proxy/nginx/data/templates/snippets/acme_challs.func](./proxy/nginx/data/templates/snippets/acme_challs.func).
     4. once certbot has generated the certificate, change the nginx config back to the usual with 443, manually adding in certs and stuff if needed since the host's certbot can't automatically tweak nginx config that's in a container.
-    5. IMPORTANTLY, also make sure that you give `750` perms to all certificates and that it has nginx's (worker process) group, as otherwise nginx won't be able to access them. i recommend running a `chown -R 0:101 /etc/letsencrypt/` (or whatever the `$DOCKER_ROOT_USER` env var is) and `chmod -R 750 /etc/letsencrypt/` since iirc the certs in `/etc/letsencrypt/live/` are actually symlinks to `/etc/letsencrypt/archive/` or whatever. to make sure certbot autorenewals don't revert this, ALSO copy [./proxy/nginx/deployment_reference/nginx_handle_certbot_renewal.sh](./proxy/nginx/deployment_reference/nginx_handle_certbot_renewal.sh) to `/etc/letsencrypt/renewal-hooks/deploy/`!
+    5. IMPORTANTLY, also make sure that you give `750` perms to all certificates and that it has nginx's (worker process) group, as otherwise nginx won't be able to access them. i recommend copying [./proxy/nginx/deployment_reference/nginx_handle_certbot_renewal.sh](./proxy/nginx/deployment_reference/nginx_handle_certbot_renewal.sh) to `/etc/letsencrypt/renewal-hooks/deploy/` first as this handles both new certs and certbot autorenewals. or, you can manually run a `chown -R 0:101 /etc/letsencrypt/` (or whatever the `$DOCKER_ROOT_USER` env var is) and `chmod -R 750 /etc/letsencrypt/` since iirc the certs in `/etc/letsencrypt/live/` are actually symlinks to `/etc/letsencrypt/archive/` or whatever.
 - run `deploy.sh` in the appropriate project directory to start or restart the containers. the `deploy.sh`s found in some subproject should allow you to deploy or restart that subproject independently. in production, you probably want to use a systemd service to run these scripts (at least the main server one; trying to make the others independent systemd services might be tricky).
 - set up and enable systemd services as necessary (deployment, backups, etc.).
 - additional recommendations:
@@ -41,6 +41,7 @@ and, to docker compose: you really are a cool concept, but sincerely, from the d
         - be mindful of owner and perms of config files and `envsubst`ed config files, especially if using a dockerfile.
     - `.env`s especially the relative paths.
     - the "SYNC" comments.
+    - dockerignores may need updating esp for cross-cutting proxy modules
     - docker compose `pre_start` images may need `docker pull`ing.
     - make sure entrypoints etc. are not accidentally dockerignored.
     - check firewalls for the server's vps/cloud service if applicable.

@@ -26,6 +26,8 @@ errorless_docker_down iocaine
 errorless_docker_down personal_website
 errorless_docker_down personal_website_mysql
 errorless_docker_down personal_website_anubis
+errorless_docker_down file_server
+errorless_docker_down file_server_anubis
 errorless_docker_down git_server
 errorless_docker_down git_server_mysql
 errorless_docker_down git_server_anubis

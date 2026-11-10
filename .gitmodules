@@ -16,3 +16,6 @@
 [submodule "services/mail_server"]
 	path = services/mail_server
 	url = ssh://git@git.anonymousrand.xyz:2222/AnonymousRand-Server-Infra/mail_server.git
+[submodule "services/file_server"]
+	path = services/file_server
+	url = ssh://git@git.anonymousrand.xyz:2222/AnonymousRand-Server-Infra/file_server.git

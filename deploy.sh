@@ -14,7 +14,7 @@ path_to_utils="$PATH_FROM_ROOT_TO_UTILS"
 chmod +x "$path_to_utils/sync_dotenvs.sh" && "$path_to_utils/sync_dotenvs.sh"
 chmod +x ./stop.sh && ./stop.sh
 
-docker system prune --force
+docker system prune --volumes --force
 if [[ "$#" -gt 0 && "$1" == "-d" ]]; then
     docker compose --profile "$DOCKER_DEFAULT_PROFILE" up --build --force-recreate -d
 else
